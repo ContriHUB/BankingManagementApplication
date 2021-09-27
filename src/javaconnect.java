@@ -16,7 +16,7 @@ public class javaconnect {
     public static Connection ConnectDb(){
         try{    
             Class.forName("org.sqlite.JDBC");
-            Connection conn=DriverManager.getConnection("jdbc:sqlite:G:\\Java projects\\Banking_Management_System\\bank.sqlite");
+            Connection conn=DriverManager.getConnection("jdbc:sqlite:/home/nisiddharth/Desktop/Banking_Management_Application/bank.sqlite");
             return conn;
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);

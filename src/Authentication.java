@@ -59,7 +59,6 @@ public class Authentication extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("G:\\Java projects\\Banking_Management_System\\images\\logo.png")); // NOI18N
         jLabel1.setText("jLabel1");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
