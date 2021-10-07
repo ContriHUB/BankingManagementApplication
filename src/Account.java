@@ -2,8 +2,12 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import java.util.regex.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -370,30 +374,135 @@ public class Account extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    // function to validate wether a (username,caste,address,security_answer) entered is in right format or not, using reegular expressions.
+    public static boolean isValidUsername(String name) {
+
+        // Regex to check valid username.
+        String regex = "^[A-Za-z]\\w{0,29}$";
+
+        // Compile the ReGex
+        Pattern p = Pattern.compile(regex);
+
+        // If the username is empty
+        // return false
+        if (name == null) {
+            return false;
+        }
+
+        // Pattern class contains matcher() method
+        // to find matching between given username
+        // and regular expression.
+        Matcher m = p.matcher(name);
+
+        // Return if the username
+        // matched the ReGex
+        return m.matches();
+    }
+    // function to validate wether a date of birth entered is corrct or not.
+    private static Boolean isValidDOB(String dob){
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        Date testDate = null;
+
+
+
+        try{
+            testDate = df.parse(dob);
+        } catch (ParseException e){ }
+        if (!df.format(testDate).equals(dob)){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    // function to validate wether a mobile number entered is in right format or not, using reegular expressions.
+    public static boolean isValidMobileNo(String str) {
+    //(0/91): number starts with (0/91)
+    //[7-9]: starting of the number may contain a digit between 0 to 9
+    //[0-9]: then contains digits 0 to 9
+            Pattern ptrn = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+    //the matcher() method creates a matcher that will match the given input against this pattern
+            Matcher match = ptrn.matcher(str);
+    //returns a boolean value
+            return (match.find() && match.group().equals(str));
+    }
+    // function to validate wether a string represents a numeric value or not.
+    public static boolean isNumeric(String string) {
+        int intValue;
+
+        System.out.println(String.format("Parsing string: \"%s\"", string));
+
+        if(string == null || string.equals("")) {
+            System.out.println("String cannot be parsed, it is null or empty.");
+            return false;
+        }
+
+        try {
+            intValue = Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("Input String cannot be parsed to Integer.");
+        }
+        return false;
+    }
+    // function to check the validity of all fields of signup form.
+    private Boolean check_validity(String name,String dob,String nationality,String acc_type,String caste,String mob,String add,String balance,String sec_a){
+        int flag=0;
+        if(isValidUsername(name)==false)flag=1;
+        if(isValidDOB(dob)==false)flag=1;
+        if(nationality=="Select")flag=1;
+        if(acc_type=="Select")flag=1;
+        if(isValidUsername(caste)==false)flag=1;
+        if(isValidMobileNo(mob)==false)flag=1;
+        if(isValidUsername(add)==false)flag=1;
+        if(isNumeric(balance)==false)flag=1;
+        if(isValidUsername(sec_a)==false)flag=1;
+
+        if(flag==1)return false;
+        else return true;
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String sql="insert into Account (Account,Name,DOB,Pin,Acc_type,Nationality,Caste,MICR_No,Gender,Mob,Address,Sec_Q,Sec_A,Balance) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             pst=conn.prepareStatement(sql);
-            pst.setString(1,jTextField1.getText());
-            pst.setString(2,jTextField4.getText());
-            pst.setString(3,jTextField11.getText());
-            pst.setString(4,jTextField3.getText());
-            pst.setString(5,(String)jComboBox1.getSelectedItem());
-            pst.setString(6,(String)jComboBox2.getSelectedItem());
-            pst.setString(7,jTextField5.getText());
-            pst.setString(8,jTextField2.getText());
+            //getting all values into variables from textboxes and dropdown menus.
+            String account_no=jTextField1.getText();
+            String name=jTextField4.getText();
+            String dob=jTextField11.getText();
+            String pin=jTextField3.getText();
+            String acc_type=(String)jComboBox1.getSelectedItem();
+            String nationality=(String)jComboBox2.getSelectedItem();
+            String caste=jTextField5.getText();
+            String micr=jTextField2.getText();
+            String mob=jTextField7.getText();
+            String add=jTextField6.getText();
+            String sec_a=jTextField9.getText();
+            String balance=jTextField10.getText();
+
+            if(check_validity(name,dob,nationality,acc_type,caste,mob,add,balance,sec_a)==false){
+                throw new Exception("Please enter values correctly!!");
+            }
+            pst.setString(1,account_no);
+            pst.setString(2,name);
+            pst.setString(3,dob);
+            pst.setString(4,pin);
+            pst.setString(5,acc_type);
+            pst.setString(6,nationality);
+            pst.setString(7,caste);
+            pst.setString(8,micr);
             
             jRadioButton1.setActionCommand("Male");
             jRadioButton2.setActionCommand("Female");
             
             
             pst.setString(9,buttonGroup1.getSelection().getActionCommand());
-            pst.setString(10,jTextField7.getText());
-            pst.setString(11,jTextField6.getText());
+            pst.setString(10,mob);
+            pst.setString(11,add);
             pst.setString(12,(String)jComboBox3.getSelectedItem());
-            pst.setString(13,jTextField9.getText());
-            pst.setString(14,jTextField10.getText());
+            pst.setString(13,sec_a);
+            pst.setString(14,balance);
             
             pst.execute();
             JOptionPane.showMessageDialog(null,"Account has been created!!");
