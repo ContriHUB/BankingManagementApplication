@@ -206,6 +206,8 @@ public class MyPage extends javax.swing.JFrame {
         jTextField39 = new javax.swing.JTextField();
         jTextField40 = new javax.swing.JTextField();
         jButton14 = new javax.swing.JButton();
+        jLabel41 = new javax.swing.JLabel();
+        jTextField43 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -461,7 +463,7 @@ public class MyPage extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 55, Short.MAX_VALUE))
+                        .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
                     .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -622,7 +624,7 @@ public class MyPage extends javax.swing.JFrame {
                             .addComponent(jTextField21))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7)
                     .addComponent(jTextField26))
                 .addGap(183, 183, 183))
@@ -877,7 +879,7 @@ public class MyPage extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jButton15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                         .addComponent(jButton16))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -910,7 +912,7 @@ public class MyPage extends javax.swing.JFrame {
         jTabbedPane1.addTab("Change Pin", jPanel8);
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel31.setText("User");
+        jLabel31.setText("Account Number");
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel32.setText("Name");
@@ -954,6 +956,8 @@ public class MyPage extends javax.swing.JFrame {
             }
         });
 
+        jLabel41.setText("Pin");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -961,7 +965,6 @@ public class MyPage extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(129, 129, 129)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel31)
                     .addComponent(jLabel32)
                     .addComponent(jLabel33)
                     .addComponent(jLabel34)
@@ -977,11 +980,20 @@ public class MyPage extends javax.swing.JFrame {
                     .addComponent(jTextField36, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField35, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField34, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField40))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(jLabel31)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField33, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
+                .addComponent(jLabel41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton14)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -992,7 +1004,9 @@ public class MyPage extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel31)
                             .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton14))
+                            .addComponent(jButton14)
+                            .addComponent(jLabel41)
+                            .addComponent(jTextField43, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
@@ -1132,29 +1146,36 @@ public class MyPage extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
-        String sql="select * from Balances where Name=?";
+        String authenticate = "select * from Account where Account = ? and Pin = ?";
+        String sql="select * from Balances where Acc=?";
         try{
-            pst=conn.prepareStatement(sql);
+            pst = conn.prepareStatement(authenticate);
+            pst.setString(1, jTextField33.getText());
+            pst.setString(2, jTextField43.getText());
+            rs = pst.executeQuery();
+            if(rs.next()) {
+                pst=conn.prepareStatement(sql);
+                pst.setString(1,jTextField33.getText());
+                rs=pst.executeQuery();
+                if(rs.next())
+                {
+                    String value1=rs.getString("Name");
+                    jTextField34.setText(value1);
+                    String value2=rs.getString("Acc");
+                    jTextField35.setText(value2);
+                    String value3=rs.getString("MICR_No");
+                    jTextField36.setText(value3);
+                    String value4=rs.getString("Balance");
+                    jTextField38.setText(value4);
+                    jTextField37.setText("4%");
+                    jTextField39.setText("Rs 0.00");
+                    jTextField40.setText("No");
+                }else
+                    JOptionPane.showMessageDialog(null,"Invalid username");
 
-            pst.setString(1,jTextField33.getText());
-
-            rs=pst.executeQuery();
-            if(rs.next())
-            {
-                String value1=rs.getString("Name");
-                jTextField34.setText(value1);
-                String value2=rs.getString("Acc");
-                jTextField35.setText(value2);
-                String value3=rs.getString("MICR_No");
-                jTextField36.setText(value3);
-                String value4=rs.getString("Balance");
-                jTextField38.setText(value4);
-                jTextField37.setText("4%");
-                jTextField39.setText("Rs 0.00");
-                jTextField40.setText("No");
-            }else
-            JOptionPane.showMessageDialog(null,"Invalid username");
-
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrent Account Number or PIN");
+            }
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
@@ -1591,6 +1612,7 @@ public class MyPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1647,6 +1669,7 @@ public class MyPage extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField40;
     private javax.swing.JTextField jTextField41;
     private javax.swing.JTextField jTextField42;
+    private javax.swing.JTextField jTextField43;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
