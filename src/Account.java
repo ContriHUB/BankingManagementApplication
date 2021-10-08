@@ -337,7 +337,7 @@ public class Account extends javax.swing.JFrame {
             pst.setString(1,jTextField4.getText());
             pst.setString(2,jTextField1.getText());
             pst.setString(3,jTextField2.getText());
-            pst.setString(4,jTextField3.getText());
+            pst.setString(4,jTextField10.getText());
             pst.execute();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
