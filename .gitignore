@@ -1,7 +1,7 @@
 target/
 bin/
 !.mvn/wrapper/maven-wrapper.jar
-
+.sqllite
 ### NetBeans ###
 nbproject/private/
 build/
