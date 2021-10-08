@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.sql.SQLException;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import java.util.regex.*;
@@ -81,6 +82,7 @@ public class Account extends javax.swing.JFrame {
         jTextField11 = new javax.swing.JTextField();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +95,13 @@ public class Account extends javax.swing.JFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("select");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -201,13 +210,16 @@ public class Account extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel10))
+                                    .addComponent(jLabel10)
+                                     .addComponent(jLabel9)
+                                     .addComponent(jLabel9))
                                 .addGap(57, 57, 57)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                                    .addComponent(jTextField11)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jTextField11,100, 100,javax.swing.GroupLayout.DEFAULT_SIZE)
+                                        .addComponent(jButton4))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel14)
@@ -239,7 +251,9 @@ public class Account extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                      .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                              .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                              .addComponent(jButton4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -321,14 +335,12 @@ public class Account extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public void RandomAcc(){
-        Random ra=new Random();
-        jTextField1.setText(""+ra.nextInt(10000+1));
-        
+        int randomAcc = getUnique("Account", 10000);
+        jTextField1.setText(""+randomAcc);
     }
     public void RandomMICR(){
-        Random ra=new Random();
-        jTextField2.setText(""+ra.nextInt(1000+1));
-        
+        int randomMICR = getUnique("MICR_No", 1000);
+        jTextField2.setText(""+randomMICR);
     }
     public void RandomPIN(){
         Random ra=new Random();
@@ -373,6 +385,11 @@ public class Account extends javax.swing.JFrame {
         jTextField10.setText(""); 
         
     }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        jTextField11.setText(new DatePicker(this).setPickedDate());
+
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // function to validate wether a (username,caste,address,security_answer) entered is in right format or not, using reegular expressions.
     public static boolean isValidUsername(String name) {
@@ -519,13 +536,45 @@ public class Account extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     /**
+     * Gives a unique integer value for the specified column in the range [0, upperLimit].
+     * @param columnName name of the column.
+     * @param upperLimit the upper limit for the random value.
+     * @return unique random value.
+     */
+    private int getUnique(String columnName, int upperLimit) {
+        String getSimilarCount = "select count(Account) from Account where " + columnName + " = ?";
+        Random ra=new Random();
+        try {
+            pst = conn.prepareStatement(getSimilarCount);
+            boolean uniqueFound = false;
+            int currentNumber = 0;
+            while(!uniqueFound) {
+                currentNumber = ra.nextInt(upperLimit+1);
+                pst.setInt(1, currentNumber);
+                res = pst.executeQuery();
+                if(res.next()) {
+                    if(res.getInt(1) == 0) uniqueFound = true;
+                } else {
+                    res.close();
+                    throw new SQLException();
+                }
+            }
+            res.close();
+            return currentNumber;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return -1; // control never reaches here.
+    }
+
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -558,6 +607,7 @@ public class Account extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
