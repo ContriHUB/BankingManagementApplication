@@ -1479,22 +1479,11 @@ public class MyPage extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-
-
         String typedOldPin=jTextField41.getText();
         String typedNewPin=jTextField42.getText();
-
-
         String user=jTextField1.getText();
-        String newpass=jTextField42.getText();
-        System.out.println("user="+user+ " newpass="+newpass);
-        String sql="update Account set Pin='"+newpass+"' where Account='"+user+"'";
-
         try{
-//            String sql="select * from Account where Account='"+currentAccountNumber+"'";
             String sql="select * from Account where Account='"+MyPage.currentAccountNumber+"'";
-            System.out.println(sql);
-
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             if(rs.next()){
