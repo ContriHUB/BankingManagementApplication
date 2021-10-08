@@ -1188,8 +1188,8 @@ public class MyPage extends javax.swing.JFrame {
             String user=jTextField28.getText();
             long balanceAmount=Integer.parseInt(jTextField30.getText());
             long withdrawalAmount=Integer.parseInt(jTextField31.getText());
-            if(withdrawalAmount<0){
-                JOptionPane.showMessageDialog(null,"The withdraw amount cannot be negetive");
+            if(withdrawalAmount<=0){
+                JOptionPane.showMessageDialog(null,"The withdraw amount should be more than 0");
                 return;
             }
             if(withdrawalAmount>balanceAmount){
@@ -1217,6 +1217,10 @@ public class MyPage extends javax.swing.JFrame {
         try{String balance=jTextField30.getText();
             String withdrawlAmount=jTextField31.getText();
             int total=Integer.parseInt(balance)-Integer.parseInt(withdrawlAmount);
+            if(total<0){
+                JOptionPane.showMessageDialog(null,"The withdraw amount exceeds balance");
+                return;
+            }
             jTextField32.setText(String.valueOf(total));
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
