@@ -24,6 +24,7 @@ public class Authentication extends javax.swing.JFrame {
      Connection conn;
     ResultSet rs;
     PreparedStatement pst;
+
     public Authentication() {
         super("login");
         initComponents();
@@ -145,6 +146,7 @@ public class Authentication extends javax.swing.JFrame {
         // TODO add your handling code here:
         String sql="select * from Account where Account=? and Pin=?";
         try{
+            String AccountNumber=jTextField1.getText();
             pst=conn.prepareStatement(sql);
             pst.setString(1,jTextField1.getText());
             pst.setString(2,jTextField2.getText());
@@ -152,6 +154,7 @@ public class Authentication extends javax.swing.JFrame {
             if(rs.next())
             {
                 setVisible(false);
+                Authentication.authenticatedAccountNumber=AccountNumber;
                 Loading ob=new Loading();
                 ob.setUpLoading();
                 ob.setVisible(true);
@@ -219,6 +222,11 @@ public class Authentication extends javax.swing.JFrame {
         });
     }
 
+    public static String getAuthenticatedAccountNumber() {
+        return authenticatedAccountNumber;
+    }
+
+    private static String authenticatedAccountNumber="";
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
