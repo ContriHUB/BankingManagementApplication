@@ -1152,7 +1152,8 @@ public class MyPage extends javax.swing.JFrame {
         try{
             pst = conn.prepareStatement(authenticate);
             pst.setString(1, jTextField33.getText());
-            pst.setString(2, jTextField43.getText());
+            String hashedString=Authentication.hashIt(jTextField43.getText());
+            pst.setString(2, hashedString);
             rs = pst.executeQuery();
             if(rs.next()) {
                 pst=conn.prepareStatement(sql);
@@ -1479,8 +1480,8 @@ public class MyPage extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        String typedOldPin=jTextField41.getText();
-        String typedNewPin=jTextField42.getText();
+        String typedOldPin=Authentication.hashIt(jTextField41.getText());
+        String typedNewPin=Authentication.hashIt(jTextField42.getText());
         String user=jTextField1.getText();
         try{
             String sql="select * from Account where Account='"+MyPage.currentAccountNumber+"'";
