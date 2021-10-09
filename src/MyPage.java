@@ -220,6 +220,11 @@ public class MyPage extends javax.swing.JFrame {
         jTextField2.setEditable(false);
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 0), 2)));
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 153, 102))));
 
@@ -461,7 +466,7 @@ public class MyPage extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 55, Short.MAX_VALUE))
+                        .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE))
                     .addComponent(jTextField14, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField13, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField15, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -622,7 +627,7 @@ public class MyPage extends javax.swing.JFrame {
                             .addComponent(jTextField21))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7)
                     .addComponent(jTextField26))
                 .addGap(183, 183, 183))
@@ -877,7 +882,7 @@ public class MyPage extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jButton15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                         .addComponent(jButton16))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1328,10 +1333,10 @@ public class MyPage extends javax.swing.JFrame {
         try{
             String value1=jTextField13.getText();
             String value2=jTextField18.getText();
-            String sql="update Balances set Balance=' "+value2+"'where Name='"+value1+"'";
+            String sql="update Balances set Balance='"+value2+"'where Acc='"+value1+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
-            sql="update Account set Balance='"+value2+"' where Name='"+value1+"'";
+            sql="update Account set Balance='"+value2+"' where Account='"+value1+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Successfully Deposited!");
@@ -1454,6 +1459,10 @@ public class MyPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,e);
         }
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
     public void Account(){
         try{
             String sql="select * from Balances";
