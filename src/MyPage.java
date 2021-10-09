@@ -34,8 +34,13 @@ public class MyPage extends javax.swing.JFrame {
         Account();
         Table1();
         Table2();
-        currentAccountNumber=Authentication.getAuthenticatedAccountNumber();
+        setTextFieldsWithAccountNumber();
     }
+
+    public static void setAuthenticatedAccountNumber(String accountNumber) {
+        MyPage.currentAccountNumber=accountNumber;
+    }
+
     public void Table1(){
         try{
             String sql="select Account,Name,DOB,Acc_type,Gender,Mob from Account";
@@ -1593,9 +1598,15 @@ public class MyPage extends javax.swing.JFrame {
             }
         });
     }
-
+    private void setTextFieldsWithAccountNumber(){
+        jTextField13.setText(currentAccountNumber);
+        jTextField19.setText(currentAccountNumber);
+        jTextField27.setText(currentAccountNumber);
+        jTextField33.setText(currentAccountNumber);
+        jTextField1.setText(currentAccountNumber);
+        jTextField8.setText(currentAccountNumber);
+    }
     static private String currentAccountNumber="";
-
 
     private String currentWithdrawlAccountNumber="";
 
