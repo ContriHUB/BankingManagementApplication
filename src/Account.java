@@ -370,7 +370,8 @@ public class Account extends javax.swing.JFrame {
         jTextField7.setText(""); 
         //jTextField8.setText(""); 
         jTextField9.setText(""); 
-        jTextField10.setText(""); 
+        jTextField10.setText("");
+       
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -400,7 +401,7 @@ public class Account extends javax.swing.JFrame {
     }
     // function to validate wether a date of birth entered is corrct or not.
     private static Boolean isValidDOB(String dob){
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date testDate = null;
 
 
@@ -457,7 +458,7 @@ public class Account extends javax.swing.JFrame {
         if(isValidUsername(add)==false)flag=1;
         if(isNumeric(balance)==false)flag=1;
         if(isValidUsername(sec_a)==false)flag=1;
-
+        
         if(flag==1)return false;
         else return true;
     }
@@ -480,7 +481,6 @@ public class Account extends javax.swing.JFrame {
             String add=jTextField6.getText();
             String sec_a=jTextField9.getText();
             String balance=jTextField10.getText();
-
             if(check_validity(name,dob,nationality,acc_type,caste,mob,add,balance,sec_a)==false){
                 throw new Exception("Please enter values correctly!!");
             }

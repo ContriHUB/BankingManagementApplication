@@ -1,15 +1,15 @@
 target/
 bin/
 !.mvn/wrapper/maven-wrapper.jar
-
+.sqlite
 ### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-target/
+nbproject/private/**
+build/**
+nbbuild/**
+dist/**
+nbdist/**
+.nb-gradle/**
+target/**
 
 ### IntelliJ IDEA ###
 .idea
