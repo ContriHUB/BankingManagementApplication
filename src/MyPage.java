@@ -1453,9 +1453,21 @@ public class MyPage extends javax.swing.JFrame {
             String value5=jTextField11.getText();
             String value6=jTextField12.getText();
             String value7=jTextField1.getText();
-            String sql="update Account set Nationality='"+value1+"',Gender='"+value2+"',Address='"+value3+"',Caste='"+value4+"',Mob='"+value5+"',Sec_Q='"+value6+"' where Name='"+value7+"'";
-
-            pst=conn.prepareStatement(sql);
+            // If this is not asserted the actual values in un-updated columns will be replaced by empty values.
+            if(value1.length() == 0 || value2.length() == 0 || value3.length() == 0|| value4.length() == 0
+                    || value5.length() == 0 || value6.length() == 0 || value7.length() == 0) {
+                JOptionPane.showMessageDialog(null, "Every editable value has to be filled!");
+                return;
+            }
+            String sql = "update Account set Nationality = ?, Gender = ?, Address = ?, Caste = ?, Mob = ?, Sec_Q = ? where Account = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, value1);
+            pst.setString(2, value2);
+            pst.setString(3, value3);
+            pst.setString(4, value4);
+            pst.setString(5, value5);
+            pst.setString(6, value6);
+            pst.setString(7, value7);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Profile Updated");
         }catch(Exception e){
@@ -1600,11 +1612,17 @@ public class MyPage extends javax.swing.JFrame {
     }
     private void setTextFieldsWithAccountNumber(){
         jTextField13.setText(currentAccountNumber);
+        jTextField13.setEditable(false);
         jTextField19.setText(currentAccountNumber);
+        jTextField19.setEditable(false);
         jTextField27.setText(currentAccountNumber);
+        jTextField27.setEditable(false);
         jTextField33.setText(currentAccountNumber);
+        jTextField33.setEditable(false);
         jTextField1.setText(currentAccountNumber);
+        jTextField1.setEditable(false);
         jTextField8.setText(currentAccountNumber);
+        jTextField8.setEditable(false);
     }
     static private String currentAccountNumber="";
 
