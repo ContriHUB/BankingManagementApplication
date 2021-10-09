@@ -417,7 +417,7 @@ public class Account extends javax.swing.JFrame {
     }
     // function to validate wether a date of birth entered is corrct or not.
     private static Boolean isValidDOB(String dob){
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date testDate = null;
 
 
