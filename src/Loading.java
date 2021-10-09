@@ -27,7 +27,11 @@ public class Loading extends javax.swing.JFrame implements Runnable {
         initComponents();
         th=new Thread((Runnable)this);
     }
-    
+
+    public static void setAuthenticatedAccountNumber(String accountNumber) {
+        MyPage.setAuthenticatedAccountNumber(accountNumber);
+    }
+
     public void setUpLoading(){
         setVisible(false);
         th.start();
