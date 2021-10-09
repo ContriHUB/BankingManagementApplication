@@ -26,15 +26,16 @@ public class MyPage extends javax.swing.JFrame {
     Connection conn;
     ResultSet rs;
     PreparedStatement pst;
-    public MyPage() {super("Home");
+    public MyPage() {
+        super("Home");
         initComponents();
         conn=javaconnect.ConnectDb();
         Calendar();
         Account();
         Table1();
         Table2();
+        currentAccountNumber=Authentication.getAuthenticatedAccountNumber();
     }
-    
     public void Table1(){
         try{
             String sql="select Account,Name,DOB,Acc_type,Gender,Mob from Account";
@@ -708,7 +709,7 @@ public class MyPage extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setText("Show");
+        jButton12.setText("Show Remaining Balance");
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -1156,7 +1157,8 @@ public class MyPage extends javax.swing.JFrame {
         try{
             pst = conn.prepareStatement(authenticate);
             pst.setString(1, jTextField33.getText());
-            pst.setString(2, jTextField43.getText());
+            String hashedString=Authentication.hashIt(jTextField43.getText());
+            pst.setString(2, hashedString);
             rs = pst.executeQuery();
             if(rs.next()) {
                 pst=conn.prepareStatement(sql);
@@ -1190,15 +1192,27 @@ public class MyPage extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         try{
-            String bal=jTextField32.getText();
             String user=jTextField28.getText();
-            String sql="update Balances set Balance='"+bal+"' where Name='"+user+"'";
+            long balanceAmount=Integer.parseInt(jTextField30.getText());
+            long withdrawalAmount=Integer.parseInt(jTextField31.getText());
+            if(withdrawalAmount<=0){
+                JOptionPane.showMessageDialog(null,"The withdraw amount should be more than 0");
+                return;
+            }
+            if(withdrawalAmount>balanceAmount){
+                JOptionPane.showMessageDialog(null,"The withdraw amount exceeds balance");
+                return;
+            }
+            long newBalance=balanceAmount-withdrawalAmount;
+            String sql="update Balances set Balance='"+String.valueOf(newBalance)+"' where Acc='"+currentWithdrawlAccountNumber+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
-            sql="update Account set Balance='"+bal+"' where Name='"+user+"'";
+            sql="update Account set Balance='"+String.valueOf(newBalance)+"' where Account='"+currentWithdrawlAccountNumber+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
-                    
+            jTextField31.setText("0");
+            jButton11ActionPerformed(evt);
+            jButton12ActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Withdraw successful");
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
@@ -1207,9 +1221,13 @@ public class MyPage extends javax.swing.JFrame {
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-        try{String value1=jTextField30.getText();
-            String value2=jTextField31.getText();
-            int total=Integer.parseInt(value1)-Integer.parseInt(value2);
+        try{String balance=jTextField30.getText();
+            String withdrawlAmount=jTextField31.getText();
+            int total=Integer.parseInt(balance)-Integer.parseInt(withdrawlAmount);
+            if(total<0){
+                JOptionPane.showMessageDialog(null,"The withdraw amount exceeds balance");
+                return;
+            }
             jTextField32.setText(String.valueOf(total));
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
@@ -1231,6 +1249,7 @@ public class MyPage extends javax.swing.JFrame {
                 jTextField28.setText(value1);
                 jTextField29.setText(value2);
                 jTextField30.setText(value3);
+                currentWithdrawlAccountNumber=rs.getString("Acc");
                 rs.close();
                 pst.close();
             }
@@ -1256,7 +1275,8 @@ public class MyPage extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        try{String value1=jTextField23.getText();
+        try{
+            String value1=jTextField23.getText();
             String value2=jTextField24.getText();
             int total=Integer.parseInt(value1)+Integer.parseInt(value2);
             jTextField26.setText(String.valueOf(total));
@@ -1465,16 +1485,31 @@ public class MyPage extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-
+        String typedOldPin=Authentication.hashIt(jTextField41.getText());
+        String typedNewPin=Authentication.hashIt(jTextField42.getText());
         String user=jTextField1.getText();
-        String newpass=jTextField42.getText();
-        String sql="update Account set Pin='"+newpass+"' where Name='"+user+"'";
         try{
+            String sql="select * from Account where Account='"+MyPage.currentAccountNumber+"'";
             pst=conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null,"Pin Changed Successfully!");
-            jTextField41.setText("");
-            jTextField42.setText("");
+            rs=pst.executeQuery();
+            if(rs.next()){
+                String correctOldPin=rs.getString("Pin");
+                if(!correctOldPin.equals(typedOldPin)){
+                    JOptionPane.showMessageDialog(null,"You have entered wrong old pin please try again");
+                    return;
+                }
+                if(typedNewPin.equals(typedOldPin)){
+                    JOptionPane.showMessageDialog(null,"You are use the same old pin please enter a different value");
+                    return;
+                }
+                sql="update Account set Pin='"+typedNewPin+"' where Account='"+MyPage.currentAccountNumber+"'";
+                pst=conn.prepareStatement(sql);
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Pin Changed Successfully!");
+                jTextField41.setText("");
+                jTextField42.setText("");
+            }
+
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null,e);
@@ -1567,6 +1602,11 @@ public class MyPage extends javax.swing.JFrame {
             }
         });
     }
+
+    static private String currentAccountNumber="";
+
+
+    private String currentWithdrawlAccountNumber="";
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
