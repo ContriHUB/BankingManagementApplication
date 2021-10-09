@@ -178,7 +178,7 @@ public class Authentication extends javax.swing.JFrame {
             if(rs.next())
             {
                 setVisible(false);
-                Authentication.authenticatedAccountNumber=AccountNumber;
+                Loading.setAuthenticatedAccountNumber(AccountNumber);
                 Loading ob=new Loading();
                 ob.setUpLoading();
                 ob.setVisible(true);
