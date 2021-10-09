@@ -395,7 +395,8 @@ public class Account extends javax.swing.JFrame {
             pst.setString(1,jTextField1.getText());
             pst.setString(2,jTextField4.getText());
             pst.setString(3,jTextField11.getText());
-            pst.setString(4,jTextField3.getText());
+            String hashedPin=Authentication.hashIt(jTextField3.getText());
+            pst.setString(4,hashedPin);
             pst.setString(5,(String)jComboBox1.getSelectedItem());
             pst.setString(6,(String)jComboBox2.getSelectedItem());
             pst.setString(7,jTextField5.getText());

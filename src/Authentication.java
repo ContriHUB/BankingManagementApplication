@@ -1,7 +1,11 @@
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Base64;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -16,15 +20,34 @@ import javax.swing.UIManager;
  * @author Shruti
  */
 public class Authentication extends javax.swing.JFrame {
+    // DO NOT MODIFY THE SALTS BELOW
+    private static final String SALT_1="7373gw34dy3";
+    private static final String SALT_2="7$73g23udy3";
 
+    /**
+     * @param input String on any Size
+     * @return String after hashing with SHA-256
+     */
+    public static String hashIt(String input){
+        String salted_input=SALT_1+input+SALT_2;
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        assert digest != null;
+        byte[] encodedhash = digest.digest(salted_input.getBytes(StandardCharsets.UTF_8));
+        String result= Base64.getEncoder().encodeToString(encodedhash);
+        return result;
+    }
     /**
      * Creates new form Authentication
      */
     
-     Connection conn;
+    Connection conn;
     ResultSet rs;
     PreparedStatement pst;
-
     public Authentication() {
         super("login");
         initComponents();
@@ -149,7 +172,8 @@ public class Authentication extends javax.swing.JFrame {
             String AccountNumber=jTextField1.getText();
             pst=conn.prepareStatement(sql);
             pst.setString(1,jTextField1.getText());
-            pst.setString(2,jTextField2.getText());
+            String hashedPin=Authentication.hashIt(jTextField2.getText());
+            pst.setString(2,hashedPin);
             rs=pst.executeQuery();
             if(rs.next())
             {
