@@ -504,7 +504,8 @@ public class Account extends javax.swing.JFrame {
             pst.setString(1,account_no);
             pst.setString(2,name);
             pst.setString(3,dob);
-            pst.setString(4,pin);
+            String hashedPin=Authentication.hashIt(jTextField3.getText());
+            pst.setString(4,hashedPin);
             pst.setString(5,acc_type);
             pst.setString(6,nationality);
             pst.setString(7,caste);
