@@ -12,16 +12,25 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class javaconnect {
-    Connection conn=null;
-    public static Connection ConnectDb(){
-        try{    
+
+    private Connection conn;
+    private static javaconnect uniqueJavaConnect;
+
+    private javaconnect() {
+        try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn=DriverManager.getConnection("jdbc:sqlite:/home/nisiddharth/Desktop/Banking_Management_Application/bank.sqlite");
-            return conn;
-        }catch(Exception e){
+            conn=DriverManager.getConnection("jdbc:sqlite:/home/nisiddharth/Desktop/Banking_Management_Application/bank.sqlite");
+        } catch (SQLException | ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null,e);
-            
         }
-        return null;
+    }
+
+    public static javaconnect getInstance() {
+        if(uniqueJavaConnect == null) uniqueJavaConnect = new javaconnect();
+        return uniqueJavaConnect;
+    }
+
+    public Connection ConnectDb(){
+        return conn;
     }
 }
