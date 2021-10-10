@@ -1410,14 +1410,14 @@ public class MyPage extends javax.swing.JFrame {
         try{
             String value1=jTextField13.getText();
             String value2=jTextField18.getText();
-            String sql="update Balances set Balance=' "+value2+"'where Name='"+value1+"'";
+            String sql="update Balances set Balance='"+value2+"'where Acc='"+value1+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
-            sql="update Account set Balance='"+value2+"' where Name='"+value1+"'";
+            sql="update Account set Balance='"+value2+"' where Account='"+value1+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(null,"Successfully Deposited!");
-            jTextField13.setText("");
+            //jTextField13.setText("");
             jTextField14.setText("");
             jTextField15.setText("");
             jTextField16.setText("");
