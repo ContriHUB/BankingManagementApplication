@@ -891,7 +891,7 @@ public class MyPage extends javax.swing.JFrame {
         jLabel40.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel40.setText("New Pin");
 
-        jButton15.setText("Cancel");
+        jButton15.setText("Clear");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
