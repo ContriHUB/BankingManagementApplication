@@ -51,7 +51,7 @@ public class Authentication extends javax.swing.JFrame {
     public Authentication() {
         super("login");
         initComponents();
-        conn=javaconnect.ConnectDb();
+        conn=javaconnect.getInstance().ConnectDb();
     }
 
     /**
