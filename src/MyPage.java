@@ -29,7 +29,7 @@ public class MyPage extends javax.swing.JFrame {
     public MyPage() {
         super("Home");
         initComponents();
-        conn=javaconnect.ConnectDb();
+        conn= javaconnect.getInstance().connectDb();
         Calendar();
         Account();
         Table1();

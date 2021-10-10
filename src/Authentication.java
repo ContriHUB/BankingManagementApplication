@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Base64;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -51,7 +50,7 @@ public class Authentication extends javax.swing.JFrame {
     public Authentication() {
         super("login");
         initComponents();
-        conn=javaconnect.ConnectDb();
+        conn= javaconnect.getInstance().connectDb();
     }
 
     /**

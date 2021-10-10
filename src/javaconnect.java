@@ -5,23 +5,36 @@
  */
 
 /**
- *
  * @author Shruti
  */
-import java.sql.*;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class javaconnect {
-    Connection conn=null;
-    public static Connection ConnectDb(){
-        try{    
+
+    private static javaconnect javaConnect;
+
+    private Connection connection;
+
+    private javaconnect() {
+        try {
             Class.forName("org.sqlite.JDBC");
-            Connection conn=DriverManager.getConnection("jdbc:sqlite:/home/nisiddharth/Desktop/Banking_Management_Application/bank.sqlite");
-            return conn;
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,e);
-            
+            this.connection = DriverManager.getConnection("jdbc:sqlite:/home/nisiddharth/Desktop/Banking_Management_Application/bank.sqlite");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
-        return null;
+    }
+
+    public static javaconnect getInstance() {
+        if (javaConnect == null) {
+            javaConnect = new javaconnect();
+        }
+        return javaConnect;
+    }
+
+    public Connection connectDb() {
+        return connection;
     }
 }
