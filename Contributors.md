@@ -9,3 +9,4 @@
 7. [Sudhanshu Kumar](https://github.com/sudhanshu1221)
 8. [Shradhey Pathak](https://github.com/Shradhey1008)
 9. [Jaspal Singh](https://github.com/always0p)
+10. [Rishav Raj](https://github.com/kitashi-kun)
