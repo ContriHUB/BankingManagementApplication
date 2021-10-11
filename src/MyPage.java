@@ -345,8 +345,6 @@ public class MyPage extends javax.swing.JFrame {
 
         jTextField12.setEditable(false);
 
-        jComboBox3.setEnabled(false);
-
         jButton1.setText("Edit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -432,7 +430,7 @@ public class MyPage extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Profile", jPanel1);
@@ -541,7 +539,7 @@ public class MyPage extends javax.swing.JFrame {
                     .addComponent(jButton5))
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Deposit", jPanel2);
@@ -880,7 +878,7 @@ public class MyPage extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Transaction", jPanel6);
@@ -914,7 +912,7 @@ public class MyPage extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jButton15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                         .addComponent(jButton16))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -941,7 +939,7 @@ public class MyPage extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton15)
                     .addComponent(jButton16))
-                .addContainerGap(341, Short.MAX_VALUE))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Change Pin", jPanel8);
@@ -1124,8 +1122,8 @@ public class MyPage extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                .addGap(16, 16, 16))
         );
 
         pack();
@@ -1250,6 +1248,7 @@ public class MyPage extends javax.swing.JFrame {
             jButton11ActionPerformed(evt);
             jButton12ActionPerformed(evt);
             JOptionPane.showMessageDialog(null,"Withdraw successful");
+            Table2();
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,e);
         }
@@ -1348,6 +1347,14 @@ public class MyPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         TransferC();
         TransferD();
+        Table2();
+        jTextField20.setText("");
+        jTextField21.setText("");
+        jTextField22.setText("");
+        jTextField23.setText("");
+        jTextField24.setText("");
+        jTextField25.setText("");
+        jTextField26.setText("");
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1423,6 +1430,7 @@ public class MyPage extends javax.swing.JFrame {
             jTextField16.setText("");
             jTextField17.setText("");
             jTextField18.setText("");
+            Table2();
         }catch(Exception e)
         {
             JOptionPane.showMessageDialog(null,e);
@@ -1609,11 +1617,11 @@ public class MyPage extends javax.swing.JFrame {
         try{
             String val1=jTextField19.getText();
             String val2=jTextField25.getText();
-            String sql="update Balances set Balance='"+val2+"' where Name='"+val1+"'";
+            String sql="update Balances set Balance='"+val2+"' where Acc='"+val1+"'";
             
             pst=conn.prepareStatement(sql);
             pst.execute();
-            sql="update Account set Balance='"+val2+"' where Name='"+val1+"'";    
+            sql="update Account set Balance='"+val2+"' where Account='"+val1+"'";    
             pst=conn.prepareStatement(sql);
             pst.execute();
         }catch(Exception e){
