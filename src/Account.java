@@ -31,7 +31,7 @@ public class Account extends javax.swing.JFrame {
     public Account() {
         super("Create Account");
         initComponents();
-        conn=javaconnect.ConnectDb();
+        conn=javaconnect.getInstance().ConnectDb();
         RandomAcc();
         RandomMICR();
         RandomPIN();
