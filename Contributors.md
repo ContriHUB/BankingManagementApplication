@@ -10,3 +10,4 @@
 8. [Shradhey Pathak](https://github.com/Shradhey1008)
 9. [Jaspal Singh](https://github.com/always0p)
 10. [Pravesh Pandey](https://github.com/pravesh-pandey)
+11. [Rishi Garg](https://github.com/rishigarg94)
