@@ -1171,10 +1171,10 @@ public class MyPage extends javax.swing.JFrame {
                 return;
             }
             long newBalance=balanceAmount-withdrawalAmount;
-            String sql="update Balances set Balance='"+String.valueOf(newBalance)+"' where Acc='"+currentWithdrawlAccountNumber+"'";
+            String sql="update Balances set Balance='"+String.valueOf(newBalance)+"' where Acc='"+MyPage.currentAccountNumber+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
-            sql="update Account set Balance='"+String.valueOf(newBalance)+"' where Account='"+currentWithdrawlAccountNumber+"'";
+            sql="update Account set Balance='"+String.valueOf(newBalance)+"' where Account='"+MyPage.currentAccountNumber+"'";
             pst=conn.prepareStatement(sql);
             pst.execute();
             jTextField31.setText("0");
@@ -1207,7 +1207,7 @@ public class MyPage extends javax.swing.JFrame {
         try{
             String sql="select * from Balances where Acc=?";
             pst=conn.prepareStatement(sql);
-            pst.setString(1,jLabel9.getText());
+            pst.setString(1,MyPage.currentAccountNumber);
             rs=pst.executeQuery();
             if(rs.next())
             {
