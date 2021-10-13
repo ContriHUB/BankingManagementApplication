@@ -49,7 +49,7 @@ public class MyPage extends javax.swing.JFrame {
         String sql="select * from Account where Account=?";
         try{
             pst=conn.prepareStatement(sql);
-            pst.setString(1,jLabel9.getText());
+            pst.setString(1,MyPage.currentAccountNumber);
             rs=pst.executeQuery();
             if(rs.next())
             {
