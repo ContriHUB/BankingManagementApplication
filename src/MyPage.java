@@ -1349,7 +1349,7 @@ public class MyPage extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         try{
-            String value1=jLabel9.getText();
+            String value1=MyPage.currentAccountNumber;
             String value2=jTextField18.getText();
             String sql="update Balances set Balance='"+value2+"'where Acc='"+value1+"'";
             pst=conn.prepareStatement(sql);
@@ -1393,7 +1393,7 @@ public class MyPage extends javax.swing.JFrame {
         String sql="select * from Balances where Acc=?";
         try{
             pst=conn.prepareStatement(sql);
-            pst.setString(1,jLabel9.getText());
+            pst.setString(1,MyPage.currentAccountNumber);
             rs=pst.executeQuery();
             if(rs.next()){
                 String value1=rs.getString("Name");
