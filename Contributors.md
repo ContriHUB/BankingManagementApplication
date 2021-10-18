@@ -16,4 +16,6 @@
 14. [Vishwas Vaish](https://github.com/VVV007)
 15. [Aman Raj](https://github.com/Amandev02)
 16. [Vaishnavi Tripathi](https://github.com/vaishnavi1011)
+17. [Nandan Kumar](https://github.com/DE-Nandan)
+18. [Swati Jindal](https://github.com/Swatijindal08)
 
