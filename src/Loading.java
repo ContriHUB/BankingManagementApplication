@@ -74,6 +74,7 @@ public class Loading extends javax.swing.JFrame implements Runnable {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
 
@@ -84,6 +85,9 @@ public class Loading extends javax.swing.JFrame implements Runnable {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setText("iBanking");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("G:\\Java projects\\Banking_Management_System\\images\\loading.jpg")); // NOI18N
+        jLabel4.setText("jLabel4");
 
         jProgressBar1.setForeground(new java.awt.Color(102, 255, 0));
         jProgressBar1.setStringPainted(true);
@@ -106,6 +110,7 @@ public class Loading extends javax.swing.JFrame implements Runnable {
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -118,6 +123,7 @@ public class Loading extends javax.swing.JFrame implements Runnable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(43, 43, 43)
+                .addComponent(jLabel4)
                 .addContainerGap(42, Short.MAX_VALUE))
         );
 
