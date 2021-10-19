@@ -805,7 +805,7 @@ public class MyPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Withdrawl", jPanel4);
+        jTabbedPane1.addTab("Withdrawal", jPanel4);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 0, 0))));
 
@@ -1216,8 +1216,8 @@ public class MyPage extends javax.swing.JFrame {
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         try{String balance=jTextField30.getText();
-            String withdrawlAmount=jTextField31.getText();
-            int total=Integer.parseInt(balance)-Integer.parseInt(withdrawlAmount);
+            String withdrawalAmount=jTextField31.getText();
+            int total=Integer.parseInt(balance)-Integer.parseInt(withdrawalAmount);
             if(total<0){
                 JOptionPane.showMessageDialog(null,"The withdraw amount exceeds balance");
                 return;
@@ -1228,7 +1228,46 @@ public class MyPage extends javax.swing.JFrame {
         }
     }                                         
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        // TODO add your handling code here:
+        try{
+            String sql="select * from Balances where Acc=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1,MyPage.currentAccountNumber);
+            rs=pst.executeQuery();
+            if(rs.next())
+            {
+                String value1=rs.getString("Name");
+                String value2=rs.getString("Acc");
+                String value3=rs.getString("Balance");
+                jTextField28.setText(value1);
+                jTextField29.setText(value2);
+                jTextField30.setText(value3);
+                currentWithdrawalAccountNumber=rs.getString("Acc");
+                rs.close();
+                pst.close();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null,"Invalid Username!");
+            }
+
+        }catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e);
+        }finally{
+            try{
+                rs.close();
+                pst.close();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null,e);
+            }
+
+        }
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
         try{
             String value1=jTextField23.getText();
@@ -1544,7 +1583,7 @@ public class MyPage extends javax.swing.JFrame {
     }
     static private String currentAccountNumber="";
 
-    private String currentWithdrawlAccountNumber="";
+    private String currentWithdrawalAccountNumber="";
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;

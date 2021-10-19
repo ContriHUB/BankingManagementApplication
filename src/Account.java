@@ -83,6 +83,7 @@ public class Account extends javax.swing.JFrame {
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
+        jRadioButton3 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -173,6 +174,9 @@ public class Account extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 0, 0));
         jLabel15.setText("Thank you for banking with us");
 
+        buttonGroup1.add(jRadioButton3);
+        jRadioButton3.setText("Other");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,18 +203,21 @@ public class Account extends javax.swing.JFrame {
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel16))
                                 .addGap(47, 47, 47)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField10)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextField1)
+                                        .addComponent(jTextField2)
+                                        .addComponent(jTextField3)
+                                        .addComponent(jTextField6)
+                                        .addComponent(jComboBox1, 0, 184, Short.MAX_VALUE)
+                                        .addComponent(jTextField10))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                                        .addComponent(jRadioButton2)))
-                                .addGap(82, 82, 82)
+                                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(86, 86, 86)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +288,8 @@ public class Account extends javax.swing.JFrame {
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jRadioButton2)
-                        .addComponent(jRadioButton1)))
+                        .addComponent(jRadioButton1)
+                        .addComponent(jRadioButton3)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -315,7 +323,7 @@ public class Account extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -369,9 +377,6 @@ public class Account extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        jTextField1.setText(""); 
-        jTextField2.setText(""); 
-        jTextField3.setText(""); 
         jTextField4.setText(""); 
         jTextField5.setText(""); 
         jTextField6.setText(""); 
@@ -507,6 +512,7 @@ public static boolean isValidUsername(String name) {
             
             jRadioButton1.setActionCommand("Male");
             jRadioButton2.setActionCommand("Female");
+            jRadioButton3.setActionCommand("Other");
             
             
             pst.setString(9,buttonGroup1.getSelection().getActionCommand());
@@ -625,6 +631,7 @@ public static boolean isValidUsername(String name) {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
