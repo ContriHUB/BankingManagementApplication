@@ -344,7 +344,7 @@ public class Account extends javax.swing.JFrame {
         
     }
     public void Bal(){
-        String sql="insert into Balances(Name,Acc,MICR_No,Balance) values (?,?,?,?)";
+        String sql="insert into Balance(Name,Acc,MICR_No,Balance) values (?,?,?,?)";
         try{
             pst=conn.prepareStatement(sql);
             pst.setString(1,jTextField4.getText());
