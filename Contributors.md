@@ -18,4 +18,5 @@
 16. [Vaishnavi Tripathi](https://github.com/vaishnavi1011)
 17. [Nandan Kumar](https://github.com/DE-Nandan)
 18. [Swati Jindal](https://github.com/Swatijindal08)
-19. [Abhay Dixit](https://github.com/AbhayD11)
+19. [Satvik Sinha](https://github.com/Satvik-Sinha)
+20. [Abhay Dixit](https://github.com/AbhayD11)
