@@ -82,6 +82,10 @@ public class Authentication extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        
+        ImageIcon imgThisImg = new ImageIcon("https://pngtree.com/so/bank-logo"));
+
+        jLabel1.setIcon(imgThisImg);
 
         jLabel1.setText("jLabel1");
 
