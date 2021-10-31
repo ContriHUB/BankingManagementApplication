@@ -19,5 +19,7 @@
 17. [Nandan Kumar](https://github.com/DE-Nandan)
 18. [Swati Jindal](https://github.com/Swatijindal08)
 19. [Abhay Dixit](https://github.com/AbhayD11)
-20. [Naman Mittal](https://github.com/just-a-n00b)
-21. [Shivanand](https://github.com/pinnacle20)
+20. [Amit Gupta](https://github.com/AmitGupta7580)
+21. [Naman Mittal](https://github.com/just-a-n00b)
+22. [Shivanand](https://github.com/pinnacle20)
+
