@@ -1147,9 +1147,9 @@ public class MyPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         String typedOldPin=Authentication.hashIt(jTextField41.getText());
         String typedNewPin=Authentication.hashIt(jTextField42.getText());
-        String user=jLabel9.getText();
+        String user=MyPage.currentAccountNumber;
         try{
-            String sql="select * from Account where Account='"+MyPage.currentAccountNumber+"'";
+            String sql="select * from Account where Account='"+user+"'";
             pst=conn.prepareStatement(sql);
             rs=pst.executeQuery();
             if(rs.next()){
@@ -1162,7 +1162,7 @@ public class MyPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null,"You are use the same old pin please enter a different value");
                     return;
                 }
-                sql="update Account set Pin='"+typedNewPin+"' where Account='"+MyPage.currentAccountNumber+"'";
+                sql="update Account set Pin='"+typedNewPin+"' where Account='"+user+"'";
                 pst=conn.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(null,"Pin Changed Successfully!");
