@@ -1110,14 +1110,14 @@ public class MyPage extends javax.swing.JFrame {
         String sql="select * from Balances where Acc=?";
         try{
             pst = conn.prepareStatement(authenticate);
-
-            pst.setString(1, jLabel9.getText());
+            String acc_no=MyPage.currentAccountNumber;
+            pst.setString(1, acc_no);
             String hashedString=Authentication.hashIt(jTextField43.getText());
             pst.setString(2, hashedString);
             rs = pst.executeQuery();
             if(rs.next()) {
                 pst=conn.prepareStatement(sql);
-                pst.setString(1,jLabel9.getText());
+                pst.setString(1,acc_no);
                 rs=pst.executeQuery();
                 if(rs.next())
                 {
@@ -1267,7 +1267,7 @@ public class MyPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         try{
             String value1=jTextField23.getText();

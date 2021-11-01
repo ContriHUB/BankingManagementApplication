@@ -82,12 +82,8 @@ public class Authentication extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        
-        ImageIcon imgThisImg = new ImageIcon("https://pngtree.com/so/bank-logo"));
 
-        jLabel1.setIcon(imgThisImg);
-
-        jLabel1.setText("jLabel1");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bank.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Enter Pin");
